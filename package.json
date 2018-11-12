@@ -14,7 +14,8 @@
   "dependencies": {
     "apollo-server-express": "^2.2.0",
     "esm": "^3.0.84",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mongoose": "^5.3.11"
   },
   "devDependencies": {
     "concurrently": "^4.0.1",

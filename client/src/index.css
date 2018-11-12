@@ -7,3 +7,8 @@ body {
   display: flex;
   justify-content: center;
 }
+.AdminForm{
+  background: rgba(0, 0, 0, .025);
+  height: 100vh;
+  width: 100vw;
+}

@@ -1,10 +1,10 @@
 import React from 'react'
 import AdminPanel from '../panels/AdminPanel'
-
-export default () => {
+import AdminForm from '../forms/AdminForm'
+export default ({ isAdmin }) => {
   return (
     <div>
-      <AdminPanel />
+      {isAdmin ? <AdminPanel /> : <AdminForm />}
     </div>
   )
 }

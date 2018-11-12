@@ -1,2 +1,3 @@
 import game from './game'
-export default [game]
+import admin from './admin'
+export default [game, admin]

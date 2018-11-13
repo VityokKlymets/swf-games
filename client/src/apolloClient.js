@@ -1,7 +1,13 @@
-import ApolloClient from 'apollo-boost'
+import ApolloClient, { InMemoryCache } from 'apollo-boost'
+import { resolvers, defaults } from './resolvers/'
 import { getToken } from './components/utils/localstorage'
+const cache = new InMemoryCache()
 const client = new ApolloClient({
   uri: 'http://localhost:3030/graphql',
+  clientState: {
+    defaults,
+    resolvers
+  },
   fetchOptions: {
     credentials: 'include'
   },
@@ -12,7 +18,8 @@ const client = new ApolloClient({
         authorization: token
       }
     })
-  }
+  },
+  cache
 })
 
 export default client

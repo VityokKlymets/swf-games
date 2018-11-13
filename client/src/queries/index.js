@@ -1,1 +1,21 @@
-export * from './admin'
+import { gql } from 'apollo-boost'
+
+export const CHECK_IS_ADMIN = gql`
+    query checkIsAdmin {
+        isAdmin @client
+    }
+`
+export const SET_ADMIN = gql`
+    mutation setAdmin($value: Boolean!){
+        setAdmin(value: $value) @client {
+            isAdmin
+        }
+    }
+`
+export const LOGIN = gql`
+    mutation($email: String!, $password: String!){
+        login(email: $email ,password: $password){
+            token
+        }
+    }
+`

@@ -6,3 +6,10 @@ export const useInput = initialState => {
     value
   }
 }
+export const useSelect = initialState => {
+  const [value, setValue] = useState(initialState)
+  return {
+    onChange: (e, { value }) => setValue(value),
+    value
+  }
+}

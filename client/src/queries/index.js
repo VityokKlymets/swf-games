@@ -19,3 +19,12 @@ export const LOGIN = gql`
         }
     }
 `
+export const GET_CATEGORIES = gql`
+    query{
+        categories{
+            text
+            value
+            key
+        }
+    }
+`

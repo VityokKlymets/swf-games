@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Menu, Grid } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import AddGameForm from '../forms/AddGameForm'
 export default () => {
   const [activeItem, setActiveItem] = useState('add')
   const setMenuItem = name => {
@@ -11,10 +12,10 @@ export default () => {
     }
   }
   return (
-    <Grid>
-      <Grid.Row>
+    <Grid padded>
+      <Grid.Row centered>
         <Grid.Column computer={4}>
-          <Menu fixed='top' vertical>
+          <Menu vertical>
             <Link to='/'>
               <Menu.Item icon='home' {...setMenuItem('home')} />
             </Link>
@@ -27,7 +28,9 @@ export default () => {
             </Menu.Item>
           </Menu>
         </Grid.Column>
-        <Grid.Column />
+        <Grid.Column computer={11}>
+          <AddGameForm />
+        </Grid.Column>
       </Grid.Row>
     </Grid>
   )

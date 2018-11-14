@@ -31,7 +31,7 @@ schema.methods.uploadScreenshot = function uploadScreenshot ({
 }
 schema.methods.toResJson = function toResJson () {
   return {
-    _id: this._id,
+    id: this._id.toString(),
     createdAt: this.createdAt,
     name: this.name,
     description: this.description,

@@ -16,7 +16,6 @@ export default () => {
     <Grid padded>
       <Grid.Row>
         <Grid.Column computer={4}>
-
           <Menu vertical>
             <Menu.Item as='a' href='/' icon='home' {...setMenuItem('home')} />
             <Menu.Item>

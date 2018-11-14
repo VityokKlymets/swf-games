@@ -30,9 +30,20 @@ export const ADD_GAME = gql`
         }
     }
 `
+export const GET_GAME = gql`
+    query($id: ID!){
+        game(id: $id){
+            name
+            src
+            category
+            description
+        }
+    }
+`
 export const GET_RECENTLY_ADDED_GAMES = gql`
     query{
         games{
+            id
             name
             description
             category

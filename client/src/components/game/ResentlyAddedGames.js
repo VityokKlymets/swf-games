@@ -14,7 +14,6 @@ export default () => {
             тут показані найсвіжіші новинки з онлайн флеш ігор
           </Header.Subheader>
         </Header.Content>
-
       </Header>
       <Query query={GET_RECENTLY_ADDED_GAMES}>
         {({ data: { games }, loading }) => {

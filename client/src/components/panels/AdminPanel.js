@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Menu, Grid, Loader } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import { GET_CATEGORIES } from '../../queries'
 import AddGameForm from '../forms/AddGameForm'
@@ -17,10 +16,9 @@ export default () => {
     <Grid padded>
       <Grid.Row>
         <Grid.Column computer={4}>
+
           <Menu vertical>
-            <Link to='/'>
-              <Menu.Item icon='home' {...setMenuItem('home')} />
-            </Link>
+            <Menu.Item as='a' href='/' icon='home' {...setMenuItem('home')} />
             <Menu.Item>
               Games
               <Menu.Menu>

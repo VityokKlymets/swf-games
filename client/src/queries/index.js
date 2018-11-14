@@ -30,6 +30,17 @@ export const ADD_GAME = gql`
         }
     }
 `
+export const GET_RECENTLY_ADDED_GAMES = gql`
+    query{
+        games{
+            name
+            description
+            category
+            screenshot
+            createdAt
+        }
+    }
+`
 export const GET_CATEGORIES = gql`
     query{
         categories{

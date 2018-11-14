@@ -16,15 +16,16 @@ const schema = new mongoose.Schema(
 )
 schema.methods.uploadFile = function uploadFile ({ result, extension }) {
   const fileName = `game.${extension}`
-  const Path = path.join(process.env.GAMES_FOLDER, this.id)
-  this.src = saveStaticFile(result, Path, fileName, 'binary')
+  const Path = path.join(process.env.GAME_FOLDER_PATH, this.id)
+  this.src = process.env.HOST + saveStaticFile(result, Path, fileName, 'binary')
 }
 schema.methods.uploadScreenshot = function uploadScreenshot ({
   result,
   extension
 }) {
   const fileName = `screenshot.${extension}`
-  const Path = path.join(process.env.GAMES_FOLDER, this.id)
-  this.screenshot = saveStaticFile(result, Path, fileName, 'base64')
+  const Path = path.join(process.env.GAME_FOLDER_PATH, this.id)
+  this.screenshot =
+    process.env.HOST + saveStaticFile(result, Path, fileName, 'base64')
 }
 export default mongoose.model('Game', schema)

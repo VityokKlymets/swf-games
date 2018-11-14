@@ -1,9 +1,9 @@
 import React from 'react'
-import FlashPlayer from '../player/FlashPlayer'
+import ResentlyAddedGames from '../game/ResentlyAddedGames'
 export default () => {
   return (
     <div>
-      <FlashPlayer src='/game.swf' />
+      <ResentlyAddedGames />
     </div>
   )
 }

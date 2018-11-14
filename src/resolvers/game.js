@@ -9,6 +9,10 @@ export default {
     },
     categories: async () => {
       return categories
+    },
+    games: async () => {
+      const games = await Game.find()
+      return games
     }
   },
   Mutation: {

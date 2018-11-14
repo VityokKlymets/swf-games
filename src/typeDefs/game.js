@@ -4,6 +4,7 @@ export default gql`
     extend type Query{
         game(id: String!): Game!
         categories: [Category!]!
+        games: [Game!]!
     }
     extend type Mutation{
         addGame(name: String!, category: String!, description: String!, file: Upload!, screenshot: Upload!): Game!
@@ -20,5 +21,6 @@ export default gql`
         description: String!
         src: String!
         screenshot: String!
+        createdAt: String!
     }
 `

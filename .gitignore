@@ -3,3 +3,4 @@ node_modules
 .next
 client/node_modules
 .env
+static

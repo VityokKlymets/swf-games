@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import { Menu, Grid } from 'semantic-ui-react'
+import { Menu, Grid, Loader } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import { Query } from 'react-apollo'
+import { GET_CATEGORIES } from '../../queries'
 import AddGameForm from '../forms/AddGameForm'
 export default () => {
   const [activeItem, setActiveItem] = useState('add')
@@ -13,7 +15,7 @@ export default () => {
   }
   return (
     <Grid padded>
-      <Grid.Row centered>
+      <Grid.Row>
         <Grid.Column computer={4}>
           <Menu vertical>
             <Link to='/'>
@@ -28,8 +30,14 @@ export default () => {
             </Menu.Item>
           </Menu>
         </Grid.Column>
-        <Grid.Column computer={11}>
-          <AddGameForm />
+        <Grid.Column computer={6}>
+          <Query query={GET_CATEGORIES}>
+            {({ data, loading }) => {
+              if (loading) return <Loader active inline />
+              return <AddGameForm categories={data.categories} />
+            }}
+          </Query>
+
         </Grid.Column>
       </Grid.Row>
     </Grid>

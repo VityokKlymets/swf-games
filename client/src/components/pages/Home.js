@@ -1,9 +1,9 @@
 import React from 'react'
-
+import FlashPlayer from '../player/FlashPlayer'
 export default () => {
   return (
     <div>
-      <h1>home page</h1>
+      <FlashPlayer src='/game.swf' />
     </div>
   )
 }

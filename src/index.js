@@ -5,9 +5,11 @@ import typeDefs from './typeDefs'
 import resolvers from './resolvers'
 import dotenv from 'dotenv'
 import admin from './middlewares/admin'
+import path from 'path'
 
 dotenv.config()
 
+process.env.STATIC_FOLDER = path.join(__dirname, 'static')
 const {
   NODE_ENV,
   PORT,
@@ -23,7 +25,9 @@ mongoose.connect(
 )
 
 const app = express()
-
+app.use('/static', express.static(process.env.STATIC_FOLDER))
+app.use(express.json({ limit: '50mb' }))
+app.use(express.urlencoded({ limit: '50mb' }))
 app.use(admin)
 
 const server = new ApolloServer({
@@ -32,7 +36,8 @@ const server = new ApolloServer({
   playground: NODE_ENV === 'development',
   context: ({ req }) => ({
     isAdmin: req.isAdmin
-  })
+  }),
+  uploads: true
 })
 server.applyMiddleware({ app })
 

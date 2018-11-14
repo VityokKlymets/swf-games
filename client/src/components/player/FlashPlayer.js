@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import ReactSwf from 'react-swf'
-export default ({ src }) => {
+export default ({ src, fullscreen = false }) => {
   const [width, setWidth] = useState('600')
   const [height, setHeight] = useState('500')
 
   useEffect(() => {
-    const windowWidth = window.innerWidth
-    const windowHeight = window.innerHeight
-    setWidth(windowWidth)
-    setHeight(windowHeight)
+    if (fullscreen) {
+      const windowWidth = window.innerWidth
+      const windowHeight = window.innerHeight
+      setHeight(windowHeight)
+      setWidth(windowWidth)
+    }
   })
   return (
     <div className='FlashPlayer'>

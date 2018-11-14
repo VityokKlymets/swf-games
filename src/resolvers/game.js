@@ -1,5 +1,6 @@
 import Game from '../models/Game'
 import categories from '../data/categories'
+
 export default {
   Query: {
     game: async (root, { id }) => {
@@ -11,9 +12,14 @@ export default {
     }
   },
   Mutation: {
-    addGame: async (root, data) => {
-      const game = new Game(data)
-      return game
+    addGame: async (root, { file, name, description, category }) => {
+      const game = new Game()
+      game.name = name
+      game.description = description
+      game.category = category
+      game.uploadFile(file)
+      const record = await game.save()
+      return record
     }
   }
 }

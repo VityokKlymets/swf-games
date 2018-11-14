@@ -19,6 +19,16 @@ export const LOGIN = gql`
         }
     }
 `
+export const ADD_GAME = gql`
+    mutation($name: String!, $category: String!, $description: String!,$file: Upload!){
+        addGame(name: $name, category: $category, description: $description, file: $file){
+            name
+            src
+            category
+            description
+        }
+    }
+`
 export const GET_CATEGORIES = gql`
     query{
         categories{

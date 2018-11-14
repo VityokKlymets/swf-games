@@ -13,17 +13,20 @@ export default ({ categories }) => {
   const fileHandler = files => {
     const reader = new window.FileReader()
     const file = files[0]
+
     reader.onload = e => {
       setFile({
-        ...file,
+        extension: file.extension,
         result: reader.result
       })
     }
-    reader.readAsText(file)
+    reader.readAsBinaryString(file)
   }
   const submitHandle = (e, submit) => {
     e.preventDefault()
-    submit()
+    submit().then(game => {
+      console.log(game)
+    })
   }
   return (
     <Mutation

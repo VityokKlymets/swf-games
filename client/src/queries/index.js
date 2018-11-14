@@ -46,7 +46,7 @@ export const GET_CATEGORIES = gql`
         categories{
             text
             value
-            key
+            icon
         }
     }
 `

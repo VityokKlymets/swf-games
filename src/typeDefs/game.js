@@ -10,9 +10,9 @@ export default gql`
         addGame(name: String!, category: String!, description: String!, file: Upload!, screenshot: Upload!): Game!
     }
     type Category{
-        key: String!
         value: String!
         text: String!
+        icon: String!
     }
     type Game{
         id: ID!

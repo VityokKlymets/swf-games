@@ -3,7 +3,7 @@ import { Card, Image, Label } from 'semantic-ui-react'
 export default ({ name, description, screenshot, category, createdAt }) => {
   const date = new Date(parseInt(createdAt))
   return (
-    <Card>
+    <Card centered>
       <Image src={screenshot} />
       <Card.Content>
         <Card.Header>{name}</Card.Header>

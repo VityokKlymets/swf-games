@@ -6,7 +6,7 @@ import resolvers from './resolvers'
 import dotenv from 'dotenv'
 import admin from './middlewares/admin'
 import path from 'path'
-
+// TODO Take screenshots from test page , test page tools
 dotenv.config()
 
 const {

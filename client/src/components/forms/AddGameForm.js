@@ -48,16 +48,13 @@ export default ({ categories }) => {
             <Form.Input
               icon='game'
               iconPosition='left'
-              placeholder='Name'
+              placeholder={`Ім'я`}
               {...name}
             />
-            <Form.TextArea
-              placeholder='enter description ....'
-              {...description}
-            />
+            <Form.TextArea placeholder='опис ....' {...description} />
             <Form.Select
               {...category}
-              placeholder='Category'
+              placeholder='Категорія'
               options={categories}
             />
             <Files
@@ -69,7 +66,7 @@ export default ({ categories }) => {
               minFileSize={0}
               clickable
             >
-              Drop files here or click to upload
+              Виберіть файл swf
             </Files>
             <ImageInput onChange={screenshotHandler} />
             <Button floated='left' color='green' size='medium'>

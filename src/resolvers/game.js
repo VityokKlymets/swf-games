@@ -5,14 +5,14 @@ export default {
   Query: {
     game: async (root, { id }) => {
       const game = await Game.findById(id)
-      return game
+      return game.toResJson()
     },
     categories: async () => {
       return categories
     },
     games: async () => {
       const games = await Game.find()
-      return games
+      return games.map(game => game.toResJson())
     }
   },
   Mutation: {

@@ -1,4 +1,5 @@
 import { saveStaticFile } from '../utils/fileLoader'
+import categories from '../data/categories'
 import path from 'path'
 import mongoose from 'mongoose'
 // TODO validation, sequelize, error messages
@@ -27,5 +28,16 @@ schema.methods.uploadScreenshot = function uploadScreenshot ({
   const Path = path.join(process.env.GAME_FOLDER_PATH, this.id)
   this.screenshot =
     process.env.HOST + saveStaticFile(result, Path, fileName, 'base64')
+}
+schema.methods.toResJson = function toResJson () {
+  return {
+    _id: this._id,
+    createdAt: this.createdAt,
+    name: this.name,
+    description: this.description,
+    src: this.src,
+    screenshot: this.screenshot,
+    category: categories.find(val => val.value === this.category).text
+  }
 }
 export default mongoose.model('Game', schema)

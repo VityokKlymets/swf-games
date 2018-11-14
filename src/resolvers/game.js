@@ -12,11 +12,15 @@ export default {
     }
   },
   Mutation: {
-    addGame: async (root, { file, name, description, category }) => {
+    addGame: async (
+      root,
+      { file, name, description, category, screenshot }
+    ) => {
       const game = new Game()
       game.name = name
       game.description = description
       game.category = category
+      game.uploadScreenshot(screenshot)
       game.uploadFile(file)
       const record = await game.save()
       return record

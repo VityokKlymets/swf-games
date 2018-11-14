@@ -20,12 +20,13 @@ export const LOGIN = gql`
     }
 `
 export const ADD_GAME = gql`
-    mutation($name: String!, $category: String!, $description: String!,$file: Upload!){
-        addGame(name: $name, category: $category, description: $description, file: $file){
+    mutation($name: String!, $category: String!, $description: String!,$file: Upload!,$screenshot: Upload!){
+        addGame(name: $name, category: $category, description: $description, file: $file,screenshot: $screenshot){
             name
             src
             category
             description
+            screenshot
         }
     }
 `

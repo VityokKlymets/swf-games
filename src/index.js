@@ -10,6 +10,7 @@ import path from 'path'
 dotenv.config()
 
 process.env.STATIC_FOLDER = path.join(__dirname, 'static')
+process.env.GAMES_FOLDER = path.join(process.env.STATIC_FOLDER, 'games')
 const {
   NODE_ENV,
   PORT,

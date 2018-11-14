@@ -3,26 +3,25 @@ import { useInput, useSelect } from '../hooks'
 import { Form, Button } from 'semantic-ui-react'
 import { Mutation } from 'react-apollo'
 import Files from 'react-files'
+import ImageInput from '../inputs/ImageInput'
 import { ADD_GAME } from '../../queries'
+import { readAsBinaryFile } from '../utils/files'
 // TODO validation, error messages
 export default ({ categories }) => {
   const category = useSelect('')
   const name = useInput('')
   const description = useInput('')
   const [file, setFile] = useState(null)
-  const fileHandler = files => {
-    const reader = new window.FileReader()
-    const file = files[0]
-
-    reader.onload = e => {
-      setFile({
-        extension: file.extension,
-        result: reader.result
-      })
-    }
-    reader.readAsBinaryString(file)
+  const [screenshot, setScreenshot] = useState(null)
+  const fileHandler = async files => {
+    let file = files[0]
+    const data = await readAsBinaryFile(file)
+    setFile(data)
   }
-  const submitHandle = (e, submit) => {
+  const screenshotHandler = data => {
+    setScreenshot(data)
+  }
+  const submitHandler = (e, submit) => {
     e.preventDefault()
     submit().then(game => {
       console.log(game)
@@ -31,6 +30,7 @@ export default ({ categories }) => {
   return (
     <Mutation
       variables={{
+        screenshot,
         file,
         category: category.value,
         name: name.value,
@@ -41,7 +41,7 @@ export default ({ categories }) => {
       {(addGame, { loading }) => {
         return (
           <Form
-            onSubmit={e => submitHandle(e, addGame)}
+            onSubmit={e => submitHandler(e, addGame)}
             loading={loading}
             className='GameForm'
           >
@@ -60,19 +60,18 @@ export default ({ categories }) => {
               placeholder='Category'
               options={categories}
             />
-            <div>
-              <Files
-                className='files-dropzone'
-                onChange={fileHandler}
-                accepts={['application/x-shockwave-flash']}
-                maxFiles={3}
-                maxFileSize={10000000}
-                minFileSize={0}
-                clickable
-              >
-                Drop files here or click to upload
-              </Files>
-            </div>
+            <Files
+              className='files-dropzone'
+              onChange={fileHandler}
+              accepts={['application/x-shockwave-flash']}
+              maxFiles={3}
+              maxFileSize={10000000}
+              minFileSize={0}
+              clickable
+            >
+              Drop files here or click to upload
+            </Files>
+            <ImageInput onChange={screenshotHandler} />
             <Button floated='left' color='green' size='medium'>
               Add
             </Button>

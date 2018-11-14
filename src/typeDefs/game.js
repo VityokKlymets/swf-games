@@ -6,7 +6,7 @@ export default gql`
         categories: [Category!]!
     }
     extend type Mutation{
-        addGame(name: String!, category: String!, description: String!,file: Upload!): Game!
+        addGame(name: String!, category: String!, description: String!, file: Upload!, screenshot: Upload!): Game!
     }
     type Category{
         key: String!
@@ -19,5 +19,6 @@ export default gql`
         category: String!
         description: String!
         src: String!
+        screenshot: String!
     }
 `

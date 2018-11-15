@@ -2,8 +2,11 @@ import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { resolvers, defaults } from '../resolvers/'
 import { getToken } from '../components/utils/localstorage'
 const cache = new InMemoryCache()
+const { NODE_ENV } = process.env
 const client = new ApolloClient({
-  uri: 'http://localhost:3030/graphql',
+  uri: NODE_ENV === 'development'
+    ? 'http://localhost:3030/graphql'
+    : '/graphql',
   clientState: {
     defaults,
     resolvers

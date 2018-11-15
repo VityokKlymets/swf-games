@@ -1,3 +1,4 @@
+import '@babel/polyfill'
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import mongoose from 'mongoose'
@@ -6,32 +7,35 @@ import resolvers from './resolvers'
 import dotenv from 'dotenv'
 import admin from './middlewares/admin'
 import path from 'path'
-// TODO Take screenshots from test page , test page tools
+
 dotenv.config()
 
 const {
   NODE_ENV,
-  PORT,
   IP,
   DB_HOST,
   DB_NAME,
   DB_PASSWORD,
   DB_PORT,
-  DB_USER
+  DB_USER,
+  STATIC_FOLDER,
+  GAMES_FOLDER
 } = process.env
-process.env.STATIC_FOLDER = path.join('static')
-process.env.GAMES_FOLDER = path.join('games')
-process.env.ROOT = __dirname
-process.env.GAME_FOLDER_PATH = path.join(
-  process.env.STATIC_FOLDER,
-  process.env.GAMES_FOLDER
-)
-process.env.HOST = `http://${IP}:${PORT}/`
-mongoose.connect(
-  `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
-  { useNewUrlParser: true }
-)
-
+process.env.ROOT = NODE_ENV === 'development' ? __dirname : process.cwd()
+process.env.GAME_FOLDER_PATH = path.join(STATIC_FOLDER, GAMES_FOLDER)
+const PORT = NODE_ENV === 'development' ? 3030 : process.env.PORT
+process.env.HOST = NODE_ENV === 'development' ? `http://${IP}:${PORT}/` : ''
+if (NODE_ENV === 'development') {
+  mongoose.connect(
+    `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
+    { useNewUrlParser: true }
+  )
+}
+if (NODE_ENV === 'production') {
+  mongoose.connect(`mongodb://localhost:27017/${DB_NAME}`, {
+    useNewUrlParser: true
+  })
+}
 const app = express()
 
 app.use(
@@ -41,7 +45,9 @@ app.use(
 if (NODE_ENV === 'production') {
   app.use(express.static('client/build'))
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build'))
+    res.sendFile(
+      path.resolve(process.env.ROOT, 'client', 'build', 'index.html')
+    )
   })
 }
 
@@ -61,5 +67,5 @@ const server = new ApolloServer({
 server.applyMiddleware({ app })
 
 app.listen(PORT, () => {
-  console.log(`🚀  Server ready at ${process.env.HOST}`)
+  console.log(`🚀  Server ready at ${PORT} port`)
 })

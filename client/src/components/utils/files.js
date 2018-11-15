@@ -2,14 +2,16 @@ export const readAsBinaryFile = file =>
   new Promise(resolve => {
     const reader = new window.FileReader()
     reader.onload = () => {
+      const name = file.name
+      const extension = name.substring(name.lastIndexOf('.') + 1)
       resolve({
-        extension: file.extension,
+        extension,
         result: reader.result
       })
     }
     reader.readAsBinaryString(file)
   })
-export const readAsDataURL = async file =>
+export const readAsDataURL = file =>
   new Promise(resolve => {
     const reader = new window.FileReader()
     reader.onload = () => {

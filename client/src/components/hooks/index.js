@@ -12,8 +12,12 @@ export const useInput = initialState => {
 }
 export const useSelect = initialState => {
   const [value, setValue] = useState(initialState)
+  const clear = () => {
+    setValue(initialState)
+  }
   return {
     onChange: (e, { value }) => setValue(value),
-    value
+    value,
+    clear
   }
 }

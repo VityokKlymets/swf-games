@@ -21,15 +21,7 @@ export default ({ categories }) => {
   const [file, setFile] = useState(initialState.file)
   const [screenshot, setScreenshot] = useState(initialState.screenshot)
 
-  const clearState = () => {
-    category.clear()
-    name.clear()
-    description.clear()
-    setFile(initialState.file)
-    setScreenshot(initialState.screenshot)
-  }
-
-  const fileHandler = file => {
+  const fileHandler = (file, filename) => {
     setFile(file)
   }
 
@@ -39,8 +31,8 @@ export default ({ categories }) => {
 
   const submitHandler = (e, submit) => {
     e.preventDefault()
-    submit().then(game => {
-      clearState()
+    submit().then(() => {
+      window.location.reload()
     })
   }
   return (

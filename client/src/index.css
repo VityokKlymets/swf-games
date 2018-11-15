@@ -12,16 +12,8 @@ body {
   height: 100vh;
   width: 100vw;
 }
-.GameForm .files-dropzone{
-  border: 1px solid #ccc;
-  cursor: pointer;
-  padding: 20px;
-  border-radius: 10px;
-  margin: 10px 0;
-}
-.GameForm .files-dropzone:hover{
-  background-color: rgba(34,36,38,.1);;
-  border: 1px solid rgba(34,36,38,.1);;
+.GameForm{
+  padding-bottom: 50px;
 }
 .ImageInput{
   margin: 10px 0;

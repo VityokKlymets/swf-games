@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useInput, useSelect } from '../hooks'
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, Message } from 'semantic-ui-react'
 import { Mutation } from 'react-apollo'
 import ImageInput from '../inputs/ImageInput'
 import { ADD_GAME } from '../../queries'
 import FileInput from '../inputs/FileInput'
-// TODO validation, error messages
+import parseError from '../utils/parseError'
+// TODO validation
 const initialState = {
   category: '',
   name: '',
@@ -42,7 +43,6 @@ export default ({ categories }) => {
       clearState()
     })
   }
-
   return (
     <Mutation
       variables={{
@@ -54,37 +54,59 @@ export default ({ categories }) => {
       }}
       mutation={ADD_GAME}
     >
-      {(addGame, { loading }) => {
+      {(addGame, { loading, error }) => {
         return (
           <Form
             onSubmit={e => submitHandler(e, addGame)}
             loading={loading}
             className='GameForm'
           >
-            <Form.Input
-              icon='game'
-              iconPosition='left'
-              placeholder={`Ім'я`}
-              onChange={name.onChange}
-              value={name.value}
-            />
-            <Form.TextArea
-              placeholder='опис ....'
-              onChange={description.onChange}
-              value={description.value}
-            />
-            <Form.Select
-              onChange={category.onChange}
-              value={category.value}
-              placeholder='Категорія'
-              options={categories}
-            />
-            <FileInput
-              fluid
-              onChange={fileHandler}
-              placeholder='Виберіть файл swf'
-            />
-            <ImageInput fluid onChange={screenshotHandler} />
+            <Form.Field>
+              <label>Ім'я</label>
+              <Form.Input
+                icon='game'
+                iconPosition='left'
+                placeholder={`Ім'я`}
+                onChange={name.onChange}
+                value={name.value}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Опис</label>
+              <Form.TextArea
+                placeholder='...........'
+                onChange={description.onChange}
+                value={description.value}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Категорія</label>
+              <Form.Select
+                onChange={category.onChange}
+                value={category.value}
+                placeholder='Виберіть категорію'
+                options={categories}
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Swf файл</label>
+              <FileInput
+                fluid
+                onChange={fileHandler}
+                placeholder='Виберіть файл swf'
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Виберіть зображення</label>
+              <ImageInput fluid onChange={screenshotHandler} />
+            </Form.Field>
+            {error &&
+              <Message negative>
+                <Message.Header>GraphQL Error</Message.Header>
+                <Message.Content>
+                  {parseError(error).map(m => <p>{m}</p>)}
+                </Message.Content>
+              </Message>}
             <Button fluid color='brown' size='large'>
               Додати
             </Button>

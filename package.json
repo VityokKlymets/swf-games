@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "v8.11.4"
+  },
   "scripts": {
     "server": "cross-env NODE_ENV=development nodemon -r esm --ignore client",
     "client:": "cd client && npm start",
     "dev": "concurrently \"npm run server\" \"cd client && npm start\"",
     "build-server": "cross-env NODE_ENV=production babel ./src  --out-dir build",
     "build": "npm run build-server && cd client && npm run build",
-    "start": "cross-env NODE_ENV=production node ./build/index.js"
+    "start": "cross-env NODE_ENV=production node ./build/index.js",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client && npm run build-server"
   },
   "keywords": [],
   "author": "",

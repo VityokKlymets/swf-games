@@ -10,32 +10,13 @@ import path from 'path'
 
 dotenv.config()
 
-const {
-  NODE_ENV,
-  IP,
-  DB_HOST,
-  DB_NAME,
-  DB_PASSWORD,
-  DB_PORT,
-  DB_USER,
-  STATIC_FOLDER,
-  GAMES_FOLDER
-} = process.env
+const { NODE_ENV, STATIC_FOLDER, GAMES_FOLDER, MONGODB_URI, PORT } = process.env
 process.env.ROOT = NODE_ENV === 'development' ? __dirname : process.cwd()
 process.env.GAME_FOLDER_PATH = path.join(STATIC_FOLDER, GAMES_FOLDER)
-const PORT = NODE_ENV === 'development' ? 3030 : process.env.PORT
-process.env.HOST = NODE_ENV === 'development' ? `http://${IP}:${PORT}/` : ''
-if (NODE_ENV === 'development') {
-  mongoose.connect(
-    `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
-    { useNewUrlParser: true }
-  )
-}
-if (NODE_ENV === 'production') {
-  mongoose.connect(`mongodb://localhost:27017/${DB_NAME}`, {
-    useNewUrlParser: true
-  })
-}
+
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true
+})
 const app = express()
 
 app.use(

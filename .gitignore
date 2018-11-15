@@ -2,5 +2,4 @@ node_modules
 .vscode
 .next
 client/node_modules
-.env
 static

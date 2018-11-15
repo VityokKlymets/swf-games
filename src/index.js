@@ -33,10 +33,18 @@ mongoose.connect(
 )
 
 const app = express()
+
 app.use(
   '/' + process.env.STATIC_FOLDER,
   express.static(path.join(process.env.ROOT, process.env.STATIC_FOLDER))
 )
+if (NODE_ENV === 'production') {
+  app.use(express.static('client/build'))
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build'))
+  })
+}
+
 app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb' }))
 app.use(admin)

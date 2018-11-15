@@ -18,7 +18,7 @@ export default ({
         <Card.Meta>
           <span className='date'>{date.toLocaleDateString()}</span>
         </Card.Meta>
-        <Card.Description>{description}</Card.Description>
+        <Card.Description textAlign='left'>{description}</Card.Description>
         <Card.Meta textAlign='right'>
           {category && <Label color='green'>{category}</Label>}
         </Card.Meta>

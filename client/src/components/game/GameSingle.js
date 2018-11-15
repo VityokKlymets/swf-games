@@ -26,9 +26,9 @@ export default ({ name, src }) => {
             <Grid.Column>
               <Button
                 floated='right'
-                primary
+                color='green'
                 style={{
-                  margin: '1em 0'
+                  margin: '2em 0'
                 }}
                 onClick={() => setFullscreen(true)}
               >

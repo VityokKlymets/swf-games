@@ -13,7 +13,7 @@ export default {
     categories: async () => {
       return categories
     },
-    games: async (root, { category = 'null' }) => {
+    games: async (root, { category = null }) => {
       const predicate = {}
       if (category) predicate.category = category
       const games = await Game.find(predicate)

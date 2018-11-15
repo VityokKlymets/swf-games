@@ -1,17 +1,17 @@
 import React, { Fragment } from 'react'
-import TopLine from '../navbar/TopLine'
 import { split } from '../utils/location'
 import { Query } from 'react-apollo'
 import { GET_GAMES_BY_CATEGORY } from '../../queries'
 import { Container, Header, Icon } from 'semantic-ui-react'
 import GamesGrid from '../game/GamesGrid'
 import CategoriesNavbar from '../navbar/CategoriesNavbar'
-export default props => {
+import page from './page'
+import Preloader from '../Preloader'
+const Category = props => {
   const paths = split(props.location.pathname)
   const categoryValue = paths[1]
   return (
     <Fragment>
-      <TopLine />
       <CategoriesNavbar
         style={{
           marginTop: '0'
@@ -24,7 +24,7 @@ export default props => {
           variables={{ category: categoryValue }}
         >
           {({ data: { games, category }, loading }) => {
-            if (loading) return null
+            if (loading) return <Preloader />
             return (
               <Fragment>
                 <Header color='green' as='h2'>
@@ -40,3 +40,4 @@ export default props => {
     </Fragment>
   )
 }
+export default page(Category)

@@ -1,6 +1,6 @@
 import React from 'react'
-import GameItem from './GameItem'
-import { Container, Header, Icon, Grid } from 'semantic-ui-react'
+import { Container, Header, Icon } from 'semantic-ui-react'
+import GamesGrid from './GamesGrid'
 import { GET_RECENTLY_ADDED_GAMES } from '../../queries'
 import { Query } from 'react-apollo'
 export default () => {
@@ -19,26 +19,7 @@ export default () => {
       <Query query={GET_RECENTLY_ADDED_GAMES}>
         {({ data: { games }, loading }) => {
           if (loading) return null
-          return (
-            <Grid centered stackable>
-              <Grid.Row>
-                {games.map((game, idx) => (
-                  <Grid.Column
-                    textAlign='center'
-                    style={{
-                      padding: '1em 1em'
-                    }}
-                    mobile={16}
-                    tablet={6}
-                    computer={4}
-                    key={idx}
-                  >
-                    <GameItem {...game} />
-                  </Grid.Column>
-                ))}
-              </Grid.Row>
-            </Grid>
-          )
+          return <GamesGrid centered games={games} />
         }}
       </Query>
     </Container>

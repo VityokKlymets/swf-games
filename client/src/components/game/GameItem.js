@@ -1,9 +1,17 @@
 import React from 'react'
 import { Card, Image, Label } from 'semantic-ui-react'
-export default ({ id, name, description, screenshot, category, createdAt }) => {
+export default ({
+  id,
+  name,
+  description,
+  screenshot,
+  category,
+  createdAt,
+  centered = false
+}) => {
   const date = new Date(parseInt(createdAt))
   return (
-    <Card as='a' href={`/game/${id}`} centered>
+    <Card as='a' href={`/game/${id}`} centered={centered}>
       <Image src={screenshot} />
       <Card.Content>
         <Card.Header>{name}</Card.Header>
@@ -12,7 +20,7 @@ export default ({ id, name, description, screenshot, category, createdAt }) => {
         </Card.Meta>
         <Card.Description>{description}</Card.Description>
         <Card.Meta textAlign='right'>
-          <Label color='green'>{category}</Label>
+          {category && <Label color='green'>{category}</Label>}
         </Card.Meta>
       </Card.Content>
     </Card>

@@ -3,6 +3,9 @@ import categories from '../data/categories'
 
 export default {
   Query: {
+    category: async (root, { value }) => {
+      return categories.find(cat => cat.value === value)
+    },
     game: async (root, { id }) => {
       const game = await Game.findById(id)
       return game.toResJson()
@@ -10,8 +13,10 @@ export default {
     categories: async () => {
       return categories
     },
-    games: async () => {
-      const games = await Game.find()
+    games: async (root, { category = 'null' }) => {
+      const predicate = {}
+      if (category) predicate.category = category
+      const games = await Game.find(predicate)
       return games.map(game => game.toResJson())
     }
   },

@@ -52,6 +52,21 @@ export const GET_RECENTLY_ADDED_GAMES = gql`
         }
     }
 `
+export const GET_GAMES_BY_CATEGORY = gql`
+    query($category: String!){
+        games(category: $category){
+            id
+            name
+            description
+            screenshot
+            createdAt
+        }
+        category(value: $category){
+            text
+            icon
+        }
+    }
+`
 export const GET_CATEGORIES = gql`
     query{
         categories{

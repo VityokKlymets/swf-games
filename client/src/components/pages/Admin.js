@@ -3,11 +3,7 @@ import AdminPanel from '../panels/AdminPanel'
 import AdminForm from '../forms/AdminForm'
 import withAdmin from '../hoc/withAdmin'
 const Admin = ({ isAdmin }) => {
-  return (
-    <div>
-      {isAdmin ? <AdminPanel /> : <AdminForm />}
-    </div>
-  )
+  return isAdmin ? <AdminPanel /> : <AdminForm />
 }
 
 export default withAdmin(Admin)

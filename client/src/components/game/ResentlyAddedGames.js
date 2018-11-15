@@ -7,7 +7,7 @@ export default () => {
   return (
     <Container>
       <Header block as='h2'>
-        <Icon color='olive' name='game' />
+        <Icon color='olive' name='home' />
         <Header.Content>
           Останні додані ігри
           <Header.Subheader>

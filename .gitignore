@@ -3,6 +3,5 @@ node_modules
 .next
 client/node_modules
 client/build
-static
 build
 .env

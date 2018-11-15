@@ -1,6 +1,6 @@
 import React from 'react'
 import { Header, Icon } from 'semantic-ui-react'
-export default () => {
+export default ({ isAdmin }) => {
   return (
     <div className='topnavbar-line'>
       <a href='/'>
@@ -9,6 +9,10 @@ export default () => {
           <Header.Content>swf-games</Header.Content>
         </Header>
       </a>
+      {isAdmin &&
+        <span className='admin'>
+          Адміністратор <Icon name='check' color='green' />
+        </span>}
     </div>
   )
 }

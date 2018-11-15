@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import ResentlyAddedGames from '../game/ResentlyAddedGames'
 import CategoriesNavbar from '../navbar/CategoriesNavbar'
+import TopLine from '../navbar/TopLine'
 import TopNavbar from '../navbar/TopNavbar'
-import page from './page'
-const Home = () => {
+import page from '../hoc/page'
+import withAdmin from '../hoc/withAdmin'
+const Home = ({ isAdmin }) => {
   return (
-    <div>
+    <Fragment>
+      <TopLine isAdmin={isAdmin} />
       <TopNavbar />
       <CategoriesNavbar
         style={{
@@ -13,7 +16,8 @@ const Home = () => {
         }}
       />
       <ResentlyAddedGames />
-    </div>
+    </Fragment>
   )
 }
-export default page(Home)
+
+export default withAdmin(page(Home))

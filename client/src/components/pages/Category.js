@@ -5,13 +5,16 @@ import { GET_GAMES_BY_CATEGORY } from '../../queries'
 import { Container, Header, Icon } from 'semantic-ui-react'
 import GamesGrid from '../game/GamesGrid'
 import CategoriesNavbar from '../navbar/CategoriesNavbar'
-import page from './page'
+import TopLine from '../navbar/TopLine'
 import Preloader from '../Preloader'
-const Category = props => {
-  const paths = split(props.location.pathname)
+import withAdmin from '../hoc/withAdmin'
+import page from '../hoc/page'
+const Category = ({ isAdmin, location }) => {
+  const paths = split(location.pathname)
   const categoryValue = paths[1]
   return (
     <Fragment>
+      <TopLine isAdmin={isAdmin} />
       <CategoriesNavbar
         style={{
           marginTop: '0'
@@ -40,4 +43,5 @@ const Category = props => {
     </Fragment>
   )
 }
-export default page(Category)
+
+export default withAdmin(page(Category))

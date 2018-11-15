@@ -1,7 +1,7 @@
 import React, { useState, createRef } from 'react'
 import { Segment, Image } from 'semantic-ui-react'
 import { readAsDataURL } from '../utils/files'
-export default ({ onChange }) => {
+export default ({ onChange, fluid = false }) => {
   const [placeholder, setPlaceholder] = useState(
     'https://react.semantic-ui.com/images/wireframe/white-image.png'
   )
@@ -21,8 +21,8 @@ export default ({ onChange }) => {
   }
   return (
     <div onClick={clickHandle} className='ImageInput clearfix'>
-      <Segment floated='left' className='pointer'>
-        <Image size='small' src={placeholder} />
+      <Segment className='pointer'>
+        <Image fluid={fluid} src={placeholder} />
       </Segment>
       <input
         onChange={changeHandle}

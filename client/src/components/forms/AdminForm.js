@@ -52,7 +52,8 @@ const AdminForm = props => {
                     icon='user'
                     iconPosition='left'
                     placeholder='E-mail address'
-                    {...email}
+                    onChange={email.onChange}
+                    value={email.value}
                   />
                   <Form.Input
                     fluid
@@ -60,7 +61,8 @@ const AdminForm = props => {
                     iconPosition='left'
                     placeholder='Password'
                     type='password'
-                    {...password}
+                    onChange={password.onChange}
+                    value={password.value}
                   />
 
                   <Button color='teal' fluid size='large'>

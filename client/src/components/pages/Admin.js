@@ -1,8 +1,7 @@
 import React from 'react'
 import AdminPanel from '../panels/AdminPanel'
 import AdminForm from '../forms/AdminForm'
-import { CHECK_IS_ADMIN } from '../../queries'
-import { compose, graphql } from 'react-apollo'
+import withAdmin from '../hoc/withAdmin'
 const Admin = ({ isAdmin }) => {
   return (
     <div>
@@ -11,10 +10,4 @@ const Admin = ({ isAdmin }) => {
   )
 }
 
-export default compose(
-  graphql(CHECK_IS_ADMIN, {
-    props: ({ data: { isAdmin } }) => ({
-      isAdmin
-    })
-  })
-)(Admin)
+export default withAdmin(Admin)

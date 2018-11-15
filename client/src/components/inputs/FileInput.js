@@ -1,6 +1,6 @@
 import React, { useState, createRef } from 'react'
 import { Segment, Label } from 'semantic-ui-react'
-import { readAsDataURL } from '../utils/files'
+import { readAsBinaryFile } from '../utils/files'
 export default ({ onChange, placeholder = 'choose file' }) => {
   const [plc, setPlaceholder] = useState(placeholder)
   const input = createRef()
@@ -10,15 +10,22 @@ export default ({ onChange, placeholder = 'choose file' }) => {
   }
   const changeHandle = async e => {
     const file = e.target.files[0]
-    console.log(file)
-    const data = await readAsDataURL(file)
+    const data = await readAsBinaryFile(file)
     setPlaceholder(file.name)
     onChange(data)
   }
   return (
     <div onClick={clickHandle} className='ImageInput clearfix'>
-      <Segment floated='left' className='pointer'>
-        <Label>{plc}</Label>
+      <Segment className='pointer'>
+        <Label
+          style={{
+            textAlign: 'center',
+            width: '100%',
+            padding: '1em 0'
+          }}
+        >
+          {plc}
+        </Label>
       </Segment>
       <input
         onChange={changeHandle}

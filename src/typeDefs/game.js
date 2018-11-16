@@ -4,6 +4,7 @@ export default gql`
     extend type Query{
         game(id: ID!): Game!
         categories: [Category!]!
+        findGames(query: String): [Game!]!
         games(category: String): [Game!]!
         category(value: String!): Category!
     }

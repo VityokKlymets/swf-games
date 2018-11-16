@@ -4,6 +4,7 @@ import TopLine from '../navbar/TopLine'
 import { Query } from 'react-apollo'
 import { GET_CATEGORIES } from '../../queries'
 import AddGameForm from '../forms/AddGameForm'
+import SearchForm from '../forms/SearchForm'
 export default () => {
   const [activeItem, setActiveItem] = useState('Додати')
   const setMenuItem = name => {
@@ -13,6 +14,15 @@ export default () => {
       onClick: () => setActiveItem(name)
     }
   }
+  const renderGameForm = () => (
+    <Query query={GET_CATEGORIES}>
+      {({ data, loading }) => {
+        if (loading) return <Loader active inline='centered' />
+        return <AddGameForm categories={data.categories} />
+      }}
+    </Query>
+  )
+  const renderSearchForm = () => <SearchForm />
   return (
     <Fragment>
       <TopLine isAdmin />
@@ -44,13 +54,8 @@ export default () => {
             </Menu>
           </Grid.Column>
           <Grid.Column computer={6}>
-            <Query query={GET_CATEGORIES}>
-              {({ data, loading }) => {
-                if (loading) return <Loader active inline='centered' />
-                return <AddGameForm categories={data.categories} />
-              }}
-            </Query>
-
+            {activeItem === 'Додати' && renderGameForm()}
+            {activeItem === 'Знайти' && renderSearchForm()}
           </Grid.Column>
         </Grid.Row>
       </Grid>

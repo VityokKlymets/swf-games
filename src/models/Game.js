@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 // TODO validation, sequelize, error messages
 const schema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
+    name: { type: String, required: true, lowercase: true },
     description: { type: String, required: true },
     category: { type: String, required: true },
     screenshot: { type: String, required: true },
@@ -40,4 +40,5 @@ schema.methods.toResJson = function toResJson () {
     category: categories.find(val => val.value === this.category).text
   }
 }
+
 export default mongoose.model('Game', schema)

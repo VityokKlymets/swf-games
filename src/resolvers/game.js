@@ -1,6 +1,6 @@
 import Game from '../models/Game'
 import categories from '../data/categories'
-
+const toResJsonGames = games => games.map(game => game.toResJson())
 export default {
   Query: {
     category: async (root, { value }) => {
@@ -13,11 +13,18 @@ export default {
     categories: async () => {
       return categories
     },
+    findGames: async (root, args) => {
+      const query = args.query.toLowerCase() || ''
+      const games = await Game.find().where({
+        name: new RegExp(query)
+      })
+      return toResJsonGames(games)
+    },
     games: async (root, { category = null }) => {
       const predicate = {}
       if (category) predicate.category = category
-      const games = await Game.find(predicate)
-      return games.map(game => game.toResJson())
+      const games = await Game.find(predicate).limit(8).sort({ createdAt: -1 })
+      return toResJsonGames(games)
     }
   },
   Mutation: {

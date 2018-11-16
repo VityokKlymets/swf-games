@@ -52,6 +52,15 @@ export const GET_RECENTLY_ADDED_GAMES = gql`
         }
     }
 `
+export const FIND_GAMES = gql`
+    query($query: String){
+        findGames(query: $query){
+            id
+            name
+            category
+        }
+    }
+`
 export const GET_GAMES_BY_CATEGORY = gql`
     query($category: String!){
         games(category: $category){

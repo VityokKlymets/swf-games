@@ -1,5 +1,6 @@
 import Game from '../models/Game'
 import categories from '../data/categories'
+import { ApolloError } from 'apollo-server-express'
 const toResJsonGames = games => games.map(game => game.toResJson())
 export default {
   Query: {
@@ -40,6 +41,14 @@ export default {
       game.uploadFile(file)
       const record = await game.save()
       return record
+    },
+    removeGame: async (root, { id }) => {
+      const record = await Game.findById(id)
+      if (record) {
+        record.removeStaticFiles()
+        record.remove()
+        return record
+      } else throw new ApolloError('Game not found!')
     }
   }
 }

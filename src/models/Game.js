@@ -1,4 +1,4 @@
-import { saveStaticFile } from '../utils/fileLoader'
+import { saveStaticFile, deleteStaticFiles } from '../utils/fileSystem'
 import categories from '../data/categories'
 import path from 'path'
 import mongoose from 'mongoose'
@@ -28,6 +28,10 @@ schema.methods.uploadScreenshot = function uploadScreenshot ({
   const Path = path.join(process.env.GAME_FOLDER_PATH, this.id)
   this.screenshot =
     process.env.HOST + saveStaticFile(result, Path, fileName, 'base64')
+}
+schema.methods.removeStaticFiles = function removeStaticFiles () {
+  const Path = path.join(process.env.GAME_FOLDER_PATH, this.id)
+  deleteStaticFiles(Path)
 }
 schema.methods.toResJson = function toResJson () {
   return {

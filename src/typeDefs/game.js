@@ -10,6 +10,7 @@ export default gql`
     }
     extend type Mutation{
         addGame(name: String!, category: String!, description: String!, file: Upload!, screenshot: Upload!): Game!
+        removeGame(id: ID!): Game!
     }
     type Category{
         value: String!

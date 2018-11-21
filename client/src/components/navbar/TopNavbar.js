@@ -1,10 +1,11 @@
 import React from 'react'
-import { Header, Icon } from 'semantic-ui-react'
+import logo from '../../assets/logo-small.svg'
+import { Header, Image } from 'semantic-ui-react'
 export default () => {
   return (
     <div className='topnavbar-content'>
       <Header style={{ color: '#fff' }} textAlign='center' icon as='h1'>
-        <Icon style={{ color: 'rgb(90, 182, 15)' }} name='game' />
+        <Image size='huge' src={logo} />
         <Header.Content>
           Вітаємо вас на нашому сайті!
           <Header.Subheader

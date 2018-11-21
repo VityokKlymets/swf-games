@@ -21,7 +21,7 @@ export default ({ categories }) => {
   const [file, setFile] = useState(initialState.file)
   const [screenshot, setScreenshot] = useState(initialState.screenshot)
 
-  const fileHandler = (file, filename) => {
+  const fileHandler = (file) => {
     setFile(file)
   }
 

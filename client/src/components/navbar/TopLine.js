@@ -36,7 +36,17 @@ export default ({ isAdmin }) => {
             )}
 
           </Mutation>
-
+          <Button
+            as='a'
+            href='/admin'
+            size='small'
+            inverted
+            style={{
+              marginLeft: '1em'
+            }}
+          >
+            Панель
+          </Button>
         </div>}
     </div>
   )

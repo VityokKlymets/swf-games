@@ -6,7 +6,7 @@ import TopLine from '../navbar/TopLine'
 import Preloader from '../Preloader'
 import withAdmin from '../hoc/withAdmin'
 import page from '../hoc/page'
-const Game = ({ isAdmin, location }) => {
+const Game = ({ isAdmin, location, history }) => {
   const pathname = location.pathname
   const id = pathname.substring(pathname.lastIndexOf('/') + 1)
   return (
@@ -15,7 +15,7 @@ const Game = ({ isAdmin, location }) => {
       <Query query={GET_GAME} variables={{ id }}>
         {({ data: { game }, loading }) => {
           if (loading) return <Preloader />
-          return <GameSingle {...game} />
+          return <GameSingle history={history} isAdmin={isAdmin} {...game} />
         }}
       </Query>
     </div>

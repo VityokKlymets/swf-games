@@ -40,6 +40,7 @@ export const DELETE_GAME = gql`
 export const GET_GAME = gql`
     query($id: ID!){
         game(id: $id){
+            id
             name
             src
             category

@@ -30,6 +30,13 @@ export const ADD_GAME = gql`
         }
     }
 `
+export const DELETE_GAME = gql`
+    mutation($id: ID!){
+        removeGame(id: $id){
+            name
+        }
+    }
+`
 export const GET_GAME = gql`
     query($id: ID!){
         game(id: $id){

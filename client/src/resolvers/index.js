@@ -15,5 +15,10 @@ export const resolvers = {
         }
       })
     }
+  },
+  Query: {
+    findGames: (_, args, { cache }) => {
+      console.log('here')
+    }
   }
 }

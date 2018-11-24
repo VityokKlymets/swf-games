@@ -4,5 +4,6 @@ node_modules
 client/node_modules
 client/build
 src/static
+/static
 build
-.env
+/.env

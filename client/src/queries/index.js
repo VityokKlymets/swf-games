@@ -60,12 +60,47 @@ export const GET_RECENTLY_ADDED_GAMES = gql`
         }
     }
 `
+export const GET_GAMES_WITH_CATEGORIES = gql`
+    query{
+        gamesWithCategories{
+            id
+            name
+            description
+            screenshot
+            createdAt
+        }
+    }
+`
 export const FIND_GAMES = gql`
     query($query: String){
         findGames(query: $query){
             id
             name
             category
+        }
+    }
+`
+export const GET_HOMEPAGE_DATA = gql`
+    query{
+        categories{
+            text
+            value
+            icon
+        }
+        games{
+            id
+            name
+            description
+            category
+            screenshot
+            createdAt
+        }
+        gamesWithCategories{
+            id
+            name
+            description
+            screenshot
+            createdAt
         }
     }
 `
@@ -80,6 +115,11 @@ export const GET_GAMES_BY_CATEGORY = gql`
         }
         category(value: $category){
             text
+            icon
+        }
+        categories{
+            text
+            value
             icon
         }
     }

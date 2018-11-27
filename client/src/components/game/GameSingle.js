@@ -5,7 +5,6 @@ import { Mutation } from 'react-apollo'
 import { DELETE_GAME } from '../../queries/index'
 import { Grid, Divider, Breadcrumb, Button, Icon } from 'semantic-ui-react'
 export default ({ name, src, id, isAdmin, history }) => {
-  console.log(history)
   const [deleteModal, setDeleteModal] = useState({
     open: false
   })

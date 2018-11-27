@@ -19,7 +19,12 @@ export default ({
           <span className='date'>{date.toLocaleDateString()}</span>
         </Card.Meta>
         <Card.Description textAlign='left'>{description}</Card.Description>
-        <Card.Meta textAlign='right'>
+        <Card.Meta
+          style={{
+            paddingTop: '1em'
+          }}
+          textAlign='right'
+        >
           {category && <Label color='green'>{category}</Label>}
         </Card.Meta>
       </Card.Content>

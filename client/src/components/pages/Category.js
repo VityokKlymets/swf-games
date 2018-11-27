@@ -15,26 +15,34 @@ const Category = ({ isAdmin, location }) => {
   return (
     <Fragment>
       <TopLine isAdmin={isAdmin} />
-      <CategoriesNavbar
-        style={{
-          marginTop: '0'
-        }}
-        currentCategory={categoryValue}
-      />
-      <Container>
+
+      <Container fluid>
         <Query
           query={GET_GAMES_BY_CATEGORY}
           variables={{ category: categoryValue }}
         >
-          {({ data: { games, category }, loading }) => {
+          {({ data: { games, category, categories }, loading }) => {
             if (loading) return <Preloader />
             return (
               <Fragment>
-                <Header color='green' as='h2'>
+                <CategoriesNavbar
+                  style={{
+                    marginTop: '0'
+                  }}
+                  currentCategory={categoryValue}
+                  categories={categories}
+                />
+                <Header
+                  style={{
+                    paddingLeft: '1em'
+                  }}
+                  color='green'
+                  as='h2'
+                >
                   <Icon name={category.icon} />
                   <Header.Content>{category.text}</Header.Content>
                 </Header>
-                <GamesGrid games={games} />
+                <GamesGrid centered games={games} />
               </Fragment>
             )
           }}

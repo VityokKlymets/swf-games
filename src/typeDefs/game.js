@@ -5,6 +5,7 @@ export default gql`
         game(id: ID!): Game!
         categories: [Category!]!
         findGames(query: String): [Game!]!
+        gamesWithCategories: [[Game!]!]!
         games(category: String): [Game!]!
         category(value: String!): Category!
     }

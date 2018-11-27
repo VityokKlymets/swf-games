@@ -6,7 +6,7 @@ import { GET_CATEGORIES } from '../../queries'
 import AddGameForm from '../forms/AddGameForm'
 import SearchForm from '../forms/SearchForm'
 export default () => {
-  const [activeItem, setActiveItem] = useState('Знайти')
+  const [activeItem, setActiveItem] = useState('Додати')
   const setMenuItem = name => {
     return {
       name,

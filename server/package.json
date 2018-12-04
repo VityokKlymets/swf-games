@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon -r esm"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,19 @@
   },
   "homepage": "https://github.com/VityokKlymets/swf-games#readme",
   "dependencies": {
-    "next": "^7.0.2",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "apollo-server-express": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^6.1.0",
+    "esm": "^3.0.84",
+    "express": "^4.16.4",
+    "graphql": "^14.0.2",
+    "graphql-upload": "^8.0.1",
+    "jsonwebtoken": "^8.3.0",
+    "mkdir-recursive": "^0.4.0",
+    "mongoose": "^5.3.11",
+    "rimraf": "^2.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.6"
   }
 }

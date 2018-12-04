@@ -1,5 +1,6 @@
-node_modules
-.next
+server/node_modules
+client/node_modules
+client/.next
 .vscode
 
-/.env
+server/.env

@@ -1,3 +1,4 @@
+import '@babel/polyfill'
 import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import mongoose from 'mongoose'
@@ -6,7 +7,7 @@ import resolvers from './resolvers'
 import admin from './middlewares/admin'
 import path from 'path'
 import config from './config'
-
+import next from 'next'
 config()
 
 const { NODE_ENV, MONGODB_URI, PORT, MONGODB_TEST_URI } = process.env
@@ -35,14 +36,6 @@ app.use(
   '/' + process.env.STATIC_FOLDER,
   express.static(path.join(process.env.ROOT, process.env.STATIC_FOLDER))
 )
-if (NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
-  app.get('*', (req, res) => {
-    res.sendFile(
-      path.resolve(process.env.ROOT, 'client', 'build', 'index.html')
-    )
-  })
-}
 
 app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb' }))
@@ -59,6 +52,19 @@ const server = new ApolloServer({
 })
 server.applyMiddleware({ app })
 
+if (NODE_ENV === 'production') {
+  const nextApp = next({
+    dev: false
+  })
+
+  const handle = nextApp.getRequestHandler()
+
+  nextApp.prepare().then(() => {
+    app.get('*', (req, res) => {
+      return handle(req, res)
+    })
+  })
+}
 app.listen(PORT, () => {
   console.log(`🚀  Server ready at ${PORT} port`)
 })

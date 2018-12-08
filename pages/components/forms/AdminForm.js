@@ -1,23 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, Icon, Form, Grid, Header, Segment } from 'semantic-ui-react'
-import { Mutation, compose, graphql } from 'react-apollo'
+import { Mutation } from 'react-apollo'
 import { useInput } from '../hooks'
-import { LOGIN, SET_ADMIN } from '../../queries'
-import { setToken } from '../utils/localstorage'
+import { LOGIN } from '../../queries'
+import { AdminContext } from '../context/AdminContext'
 // TODO validation, error messages
-const AdminForm = props => {
+const AdminForm = () => {
   const email = useInput('')
+  const { setAdminToken } = useContext(AdminContext)
   const password = useInput('')
   const handleSubmit = (e, login) => {
     e.preventDefault()
     login().then(({ data }) => {
       const token = data.login.token
-      props.setAdmin({
-        variables: {
-          value: !!token
-        }
-      })
-      setToken(token)
+      setAdminToken(token)
     })
   }
   return (
@@ -71,13 +67,11 @@ const AdminForm = props => {
                 </Segment>
               </Form>
             )}
-
           </Mutation>
-
         </Grid.Column>
       </Grid>
     </div>
   )
 }
 
-export default compose(graphql(SET_ADMIN, { name: 'setAdmin' }))(AdminForm)
+export default AdminForm

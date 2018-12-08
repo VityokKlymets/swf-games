@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Header, Icon, Button } from 'semantic-ui-react'
-import { Mutation } from 'react-apollo'
-import { SET_ADMIN } from '../../queries'
+import { AdminContext } from '../context/AdminContext'
+
 export default ({ isAdmin }) => {
+  const { setAdminToken } = useContext(AdminContext)
   return (
     <div className='topnavbar-line'>
       <a href='/'>
@@ -11,31 +12,23 @@ export default ({ isAdmin }) => {
           <Header.Content>swf-games</Header.Content>
         </Header>
       </a>
-      {isAdmin &&
+      {isAdmin && (
         <div>
           <span className='admin'>
             Адміністратор <Icon name='check' color='green' />
           </span>
-          <Mutation
-            mutation={SET_ADMIN}
-            variables={{
-              value: false
-            }}
-          >
-            {setAdmin => (
-              <Button
-                size='small'
-                inverted
-                style={{
-                  marginLeft: '1em'
-                }}
-                onClick={() => setAdmin()}
-              >
-                Вийти
-              </Button>
-            )}
 
-          </Mutation>
+          <Button
+            size='small'
+            inverted
+            style={{
+              marginLeft: '1em'
+            }}
+            onClick={() => setAdminToken('')}
+          >
+            Вийти
+          </Button>
+
           <Button
             as='a'
             href='/admin'
@@ -47,7 +40,8 @@ export default ({ isAdmin }) => {
           >
             Панель
           </Button>
-        </div>}
+        </div>
+      )}
     </div>
   )
 }

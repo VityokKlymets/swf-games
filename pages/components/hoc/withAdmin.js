@@ -1,13 +1,10 @@
 import React from 'react'
-import { Query } from 'react-apollo'
-import { CHECK_IS_ADMIN } from '../../queries'
+import { AdminConsumer } from '../context/AdminContext'
 const withAdmin = Component => props => {
   return (
-    <Query query={CHECK_IS_ADMIN}>
-      {({ data: { isAdmin } }) => {
-        return <Component {...props} isAdmin={isAdmin} />
-      }}
-    </Query>
+    <AdminConsumer>
+      {({ isAdmin }) => <Component {...props} isAdmin={isAdmin} />}
+    </AdminConsumer>
   )
 }
 

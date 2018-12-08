@@ -19,7 +19,6 @@ export default class MyDocument extends Document {
             href='//cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css'
           />
           <link rel='stylesheet' href='/static/css/index.css' />
-          <link rel='stylesheet' href='/static/css/preloader.css' />
         </Head>
         <body>
           <Main />

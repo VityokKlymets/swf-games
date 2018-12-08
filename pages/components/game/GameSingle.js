@@ -4,16 +4,17 @@ import DeleteGameModal from '../modals/DeleteGameModal'
 import { Mutation } from 'react-apollo'
 import { DELETE_GAME } from '../../queries/index'
 import { Grid, Divider, Breadcrumb, Button, Icon } from 'semantic-ui-react'
-export default ({ name, src, id, isAdmin, history }) => {
+import Router from 'next/router'
+export default ({ name, src, id, isAdmin }) => {
   const [deleteModal, setDeleteModal] = useState({
     open: false
   })
   const deleteHandler = deleteGame => {
-    deleteGame().then(data => {
+    deleteGame().then(() => {
       setDeleteModal({
         open: false
       })
-      history.push('/')
+      Router.push('/')
     })
   }
   const renderAdminRow = () => (
@@ -40,7 +41,8 @@ export default ({ name, src, id, isAdmin, history }) => {
                     setDeleteModal({
                       open: false
                     })
-                })}
+                })
+              }
             >
               <Icon name='trash' />
             </Button>
@@ -64,7 +66,6 @@ export default ({ name, src, id, isAdmin, history }) => {
           {isAdmin && renderAdminRow()}
         </Grid.Column>
       </Grid.Row>
-
     </Grid>
   )
 }

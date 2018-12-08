@@ -9,12 +9,11 @@ import Preloader from './components/Preloader'
 import withAdmin from './components/hoc/withAdmin'
 import page from './components/hoc/page'
 import withData from './lib/withData'
-const Category = ({ isAdmin, url }) => {
-  const category = url.query.cat
+const Category = ({ isAdmin, query }) => {
+  const category = query.cat
   return (
     <Fragment>
       <TopLine isAdmin={isAdmin} />
-
       <Container fluid>
         <Query query={GET_GAMES_BY_CATEGORY} variables={{ category }}>
           {({ data: { games, category, categories }, loading }) => {
@@ -47,5 +46,4 @@ const Category = ({ isAdmin, url }) => {
     </Fragment>
   )
 }
-
 export default withData(withAdmin(page(Category)))
